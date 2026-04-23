@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magazine — B-Free</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Space+Mono:wght@400;700&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* 드래그 선택 방지 */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        :root {
+            --cream:  #F0EDE6;
+            --sand:   #D9D0BF;
+            --red:    #E8240C;
+            --dark:   #111111;
+            --muted:  #888;
+        }
+
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background: var(--cream);
+            color: var(--dark);
+        }
+
+
+
+        /* ── HERO ── */
+        .hero {
+            width: 100%;
+        }
+
+        .hero img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ── TICKER ── */
+        .ticker-wrap {
+            overflow: hidden;
+            background: var(--red);
+            padding: 11px 0;
+        }
+
+        .ticker-move {
+            display: inline-block;
+            white-space: nowrap;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            color: #fff;
+            animation: slide-left 20s infinite linear;
+        }
+
+        @keyframes slide-left {
+            0%   { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* ── INTRO — cream bg ── */
+        .intro {
+            background: var(--cream);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            padding: 100px 80px;
+            align-items: end;
+        }
+
+        .intro-left h2 {
+            font-family: 'Lalezar', cursive;
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            line-height: 0.95;
+            color: var(--dark);
+        }
+
+        .intro-left h2 em {
+            color: var(--red);
+            font-style: normal;
+        }
+
+        .intro-right {
+            padding-left: 60px;
+        }
+
+        .intro-right p {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: #555;
+            margin-bottom: 16px;
+        }
+
+        .meta-row {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid #ccc;
+        }
+
+        .meta-row span {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .meta-row span strong {
+            display: block;
+            font-family: 'Lalezar', cursive;
+            font-size: 1.1rem;
+            color: var(--dark);
+            letter-spacing: 0.05em;
+            margin-bottom: 2px;
+        }
+
+        /* ── FEATURES — dark bg ── */
+        .features {
+            background: var(--dark);
+            padding: 90px 80px;
+        }
+
+        .features-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 70px;
+        }
+
+        .features-top h3 {
+            font-family: 'Lalezar', cursive;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            color: #fff;
+            line-height: 1.05;
+            max-width: 380px;
+        }
+
+        .features-top h3 em { color: var(--red); font-style: normal; }
+
+        .features-top p {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.8;
+            max-width: 360px;
+            padding-top: 8px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .feature-item {
+            background: var(--dark);
+            padding: 32px 28px;
+            transition: background 0.25s;
+        }
+
+        .feature-item:hover { background: #1a1a1a; }
+
+        .feature-item .num {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            color: var(--red);
+            margin-bottom: 20px;
+        }
+
+        .feature-item h4 {
+            font-family: 'Lalezar', cursive;
+            font-size: 1.15rem;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .feature-item p {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.7;
+        }
+
+        /* ── STATEMENT — sand bg ── */
+        .statement {
+            background: var(--sand);
+            padding: 110px 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .statement-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 32px;
+        }
+
+        .statement-big {
+            font-family: 'Lalezar', cursive;
+            font-size: clamp(3.5rem, 9vw, 8rem);
+            line-height: 0.88;
+            color: var(--dark);
+        }
+
+        .statement-big span { color: var(--red); }
+
+        .statement-sub {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 48px;
+            margin-top: 64px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(0,0,0,0.15);
+        }
+
+        .statement-sub p {
+            font-size: 0.82rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* ── ARTICLES — cream bg ── */
+        .articles {
+            background: var(--cream);
+            padding: 90px 80px;
+        }
+
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.62rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 40px;
+        }
+
+        /* =========================================
+           [실습 2] 내부 기사 카드 Grid 배열
+           ========================================= */
+        .article-grid {
+            /* TODO 3: 2-column grid (1fr 1fr), gap 15px */
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .magic-card {
+            overflow: hidden;
+            background: var(--sand);
+            /* TODO 4: hover float */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .magic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+        }
+
+        .magic-card img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(25%);
+            transition: filter 0.35s ease;
+        }
+
+        .magic-card:hover img { filter: grayscale(0%); }
+
+        .card-body { padding: 24px; }
+
+        .badge-new {
+            display: inline-block;
+            background: var(--red);
+            color: #fff;
+            padding: 3px 10px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            /* TODO 6: float badge */
+            animation: float-badge 2.4s ease-in-out infinite;
+        }
+
+        @keyframes float-badge {
+            0%   { transform: translateY(0); }
+            50%  { transform: translateY(-4px); }
+            100% { transform: translateY(0); }
+        }
+
+        .card-body h3 {
+            font-family: 'Lalezar', cursive;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .card-body p {
+            font-size: 0.78rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* ── QUOTE — red bg ── */
+        .quote-section {
+            background: var(--red);
+            padding: 100px 80px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .quote-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            line-height: 2;
+        }
+
+        .quote-text {
+            font-family: 'Lalezar', cursive;
+            font-size: clamp(2rem, 4.5vw, 3.8rem);
+            color: #fff;
+            line-height: 1.1;
+        }
+
+        /* ── TRACKLIST — dark bg ── */
+        .tracklist-section {
+            background: var(--dark);
+            padding: 90px 80px;
+        }
+
+        .tracklist-section .section-label { color: rgba(255,255,255,0.3); }
+
+        .tracklist { list-style: none; }
+
+        .tracklist li {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.55);
+            transition: color 0.2s;
+            cursor: default;
+        }
+
+        .tracklist li:hover { color: #fff; }
+
+        .track-num { color: rgba(255,255,255,0.2); min-width: 28px; font-size: 0.65rem; }
+        .track-title { flex: 1; color: rgba(255,255,255,0.85); font-weight: 700; }
+        .track-album { flex: 1; }
+        .track-dur { }
+
+        img {
+        -webkit-user-drag: none;
+        pointer-events: none;
+        }
+
+        /* ── FOOTER — cream ── */
+        footer {
+            background: var(--cream);
+            padding: 40px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer .logo-ft {
+            font-family: 'Lalezar', cursive;
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+
+        footer p {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        footer span {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            color: var(--red);
+        }
+
+        @media (max-width: 768px) {
+            .intro, .quote-section { grid-template-columns: 1fr; padding: 60px 28px; }
+            .intro-right { padding-left: 0; margin-top: 40px; }
+            .features { padding: 60px 28px; }
+            .features-grid { grid-template-columns: 1fr 1fr; }
+            .statement { padding: 70px 28px; }
+            .statement-sub { grid-template-columns: 1fr; gap: 24px; }
+            .articles { padding: 60px 28px; }
+            .article-grid { grid-template-columns: 1fr; }
+            .tracklist-section { padding: 60px 28px; }
+            footer { flex-direction: column; gap: 12px; padding: 32px 28px; text-align: center; }
+        }
+
+        /* ── ALBUMS GRID ── */
+        .albums-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .album-card img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .album-card:hover img {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+        }
+
+        .album-info {
+            padding: 16px 0 0;
+        }
+
+        .album-info h4 {
+            font-family: 'Lalezar', cursive;
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .album-info p {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 10px;
+        }
+
+        .album-info span {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            .albums-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO —  사진만 -->
+<section class="hero">
+    <img src="Magazine_csw.png" alt="B-Free Cover">
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+    <div class="ticker-move">
+        🎤 NEW ALBUM INCOMING — lead single charting nationwide &nbsp;·&nbsp;
+        Live tour dates dropping soon &nbsp;·&nbsp;
+        Deep dive: how his lyrics rewired my brain &nbsp;·&nbsp;
+        Name: Choi Sungho. Still a tiger. Living on the Korea. &nbsp;·&nbsp;
+        🎧 FREQ VOL.1 — reading now &nbsp;·&nbsp;
+        A monstrous album to spark courage &nbsp;·&nbsp;
+    </div>
+</div>
+
+<!-- INTRO — cream -->
+<section class="intro">
+    <div class="intro-left">
+        <h2>MY<br><em>FAVORITE</em><br>RAPPER</h2>
+    </div>
+    <div class="intro-right">
+        <p>
+            The first time I heard B-Free, I wasn't ready for it.
+            Raw, unfiltered, and entirely his own — his voice cut through
+            every polished surface the industry had built around Korean hip-hop.
+        </p>
+        <p>
+            This magazine is my attempt to put that feeling into words.
+            Replace this with your own story.
+        </p>
+        <div class="meta-row">
+            <span><strong>B-FREE</strong>Real Name</span>
+            <span><strong>SINCE 2010</strong>Active</span>
+            <span><strong>KOREAN HIP-HOP</strong>Genre</span>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES — dark -->
+<section class="features">
+    <div class="features-top">
+        <h3>Why I keep<br>coming back to<br><em>his music</em></h3>
+        <p>
+            There are rappers who make hits, and there are rappers
+            who make you think. B-Free has always been the latter —
+            and that's exactly why this deep dive exists.
+        </p>
+    </div>
+    <div class="features-grid">
+        <div class="feature-item">
+            <div class="num">01 —</div>
+            <h4>Lyricism</h4>
+            <p>Dense, layered writing that rewards every relisten with something new.</p>
+        </div>
+        <div class="feature-item">
+            <div class="num">02 —</div>
+            <h4>Delivery</h4>
+            <p>A flow that shifts registers — calm one bar, devastating the next.</p>
+        </div>
+        <div class="feature-item">
+            <div class="num">03 —</div>
+            <h4>Production</h4>
+            <p>Works with beats that match his unpredictability. Nothing generic.</p>
+        </div>
+        <div class="feature-item">
+            <div class="num">04 —</div>
+            <h4>Authenticity</h4>
+            <p>No industry cosplay. Just the scene, the grind, and the truth.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ALBUMS — sand -->
+<section class="statement">
+    <div class="statement-label">B-FREE'S</div>
+    <div class="statement-big" style="font-size: clamp(3rem, 7vw, 6rem); margin-bottom: 48px;">ALBUMS</div>
+    <div class="albums-grid">
+        <div class="album-card">
+            <img src="korean_dream.png" alt="Korean Dream">
+            <div class="album-info">
+                <h4>Korean Dream</h4>
+                <p>2014 · Mixtape</p>
+            </div>
+        </div>
+        <div class="album-card">
+            <img src="Free_The_Beast.png" alt="Free the Beast">
+            <div class="album-info">
+                <h4>Free the Beast</h4>
+                <p>2016 · Album</p>
+            </div>
+        </div>
+        <div class="album-card">
+            <img src="Free_Hukky.png" alt="Symphony">
+            <div class="album-info">
+                <h4>Life's a Symphony</h4>
+                <p>2020 · Album</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- QUOTE — red -->
+<section class="quote-section">
+    <div class="quote-label">
+        B-FREE<br>Choi Sungho<br>Korean Hip-Hop<br>Since 2010
+    </div>
+    <div class="quote-text">
+        "Life's a symphony.<br>I'm the conductor."
+    </div>
+</section>
+
+<!-- TRACKLIST — dark -->
+<section class="tracklist-section">
+    <p class="section-label">My Essential Playlist</p>
+    <ul class="tracklist">
+        <li><span class="track-num">01</span><span class="track-title">Hot Summer</span><span class="track-album">Korean Dream</span><span class="track-dur">3:35</span></li>
+        <li><span class="track-num">02</span><span class="track-title">Feel It (Feat. Keith Ape)</span><span class="track-album">Korean Dream</span><span class="track-dur">4:14</span></li>
+        <li><span class="track-num">03</span><span class="track-title">LIFE SAVER (Feat. PNSB)</span><span class="track-album">Free The Beast</span><span class="track-dur">2:20</span></li>
+        <li><span class="track-num">04</span><span class="track-title">INDO</span><span class="track-album">Free Hukky Shibaseki & the God Sun Symphony Group : Odyssey.1</span><span class="track-dur">2:52</span></li>
+    </ul>
+</section>
+
+<!-- FOOTER — cream -->
+<footer>
+    <div class="logo-ft">B-FREE</div>
+    <p>Vol. 1 · Issue 01 · Apr. 2026 · HipHop & Culture</p>
+    <span>Curated by me, for me.</span>
+</footer>
+
+</body>
+</html>
